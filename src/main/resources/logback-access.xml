@@ -1,0 +1,20 @@
+<configuration>
+	<property file="${logging.config}" />
+	<property name="ACCESS_LOG_PATTERN" value="%h %i %l %u %t &quot;%r&quot; %s %b %D" />
+	<springProfile name="dev">
+		<property file="src/main/resources/application-dev.properties" />
+	</springProfile>
+	<springProfile name="!dev">
+		<property file="src/main/resources/application-.properties" />
+	</springProfile>
+
+	<appender name="ACCESS_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder class="ch.qos.logback.access.PatternLayoutEncoder">
+			<pattern>%h %i%n %l %u %t "%r" %s %b %D%n%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${server.tomcat.basedir}/${server.tomcat.accesslog.directory}/${server.tomcat.accesslog.prefix}.%d{yyyy-MM-dd}${server.tomcat.accesslog.suffix}</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+	<appender-ref ref="ACCESS_LOG" />
+</configuration>

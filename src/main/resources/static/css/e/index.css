@@ -1,0 +1,11 @@
+@charset "UTF-8";
+.return_home {
+	width: 100dvw;
+	height: calc(100dvh - 51px);
+	border: none;
+
+	font-size: 10dvw;
+	background-color: transparent;
+	cursor: pointer;
+
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{m/fragment :: head(title = '従業員明細', scripts = ~{::script}, links = ~{::link})}">
+	<link th:href="@{/css/e/detail.css}" rel="stylesheet">
+	<script th:src="@{/js/e/detail.js}" type="text/javascript"></script>
+</head>
+<body>
+	<div th:replace="~{m/fragment :: e_header}"></div>
+
+	<div class="main">
+		<div>
+			<h1>明細</h1>
+			<ol>
+				<li th:each="detail : ${detailListParam.detailList}">
+					<details>
+						<summary>
+								<span th:text="${#dates.format(detail.createDate, 'yyyy/MM/dd HH:mm:ss.SSS')}"></span>
+								<span class="money" th:text="${T(java.lang.String).format('%,d', detail.total)}"></span>
+						</summary>
+						<table>
+							<thead>
+								<tr>
+									<th>写真</th>
+									<th>名前</th>
+									<th>金額/個</th>
+									<th>個数</th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="entry : ${detail.detailMap}">
+									<tr>
+										<td>
+											<img th:src="${entry.key.pic}" alt="写真">
+										</td>
+										<td th:text="${entry.key.name}"></td>
+										<td class="money" th:text="${entry.key.prize}"></td>
+										<td th:text="${entry.value}"></td>
+									</tr>
+								</th:block>
+							</tbody>
+						</table>
+					</details>
+				</li>
+			</ol>
+			<h1>時間別明細</h1>
+			<ol>
+				<li th:each="detail : ${unitTimeMap}">
+					<details>
+						<summary>
+								<span th:text="${detail.key}" class="unit_time"></span>
+								<span class="money" th:text="${T(java.lang.String).format('%,d', detail.value.total)}"></span>
+						</summary>
+						<table>
+							<thead>
+								<tr>
+									<th>写真</th>
+									<th>名前</th>
+									<th>金額/個</th>
+									<th>個数</th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="entry : ${detail.value.detailMap}">
+									<tr>
+										<td>
+											<img th:src="${entry.key.pic}" alt="写真">
+										</td>
+										<td th:text="${entry.key.name}"></td>
+										<td class="money" th:text="${entry.key.prize}"></td>
+										<td th:text="${entry.value}"></td>
+									</tr>
+								</th:block>
+							</tbody>
+						</table>
+					</details>
+				</li>
+			</ol>
+		</div>
+	</div>
+</body>
+</html>

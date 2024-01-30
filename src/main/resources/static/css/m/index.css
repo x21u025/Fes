@@ -1,0 +1,30 @@
+@charset "UTF-8";
+.img {
+	width: min(1010px, 95dvw);
+	height: auto;
+
+	margin: 10px auto;
+}
+.map {
+	width: min(600px, 95dvw);
+	height: auto;
+
+	display: inline-block;
+	margin: auto;
+}
+.poster {
+	width: min(200px, 95dvw);
+	height: auto;
+
+	display: inline-block;
+	margin: auto;
+}
+
+@media (max-width: 767px) {
+	.img {
+		width: min(1000px, 95dvw);
+	}
+	.poster {
+		width: min(400px, 95dvw);
+	}
+}

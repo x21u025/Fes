@@ -1,0 +1,23 @@
+@charset "UTF-8";
+@import "./boardgame.css";
+
+.container {
+	margin: 30px auto;
+	max-width: min(1000px, calc(100dvw - 10px));
+	width: 100%;
+}
+img {
+	height: auto;
+	width: 100%;
+}
+.thumbnail .slick-track {
+	transform: unset !important;
+}
+.thumbnail-img {
+	opacity: 0.3;
+	transition: opacity .3s linear;
+	width: calc(100% / 4) !important;
+}
+.thumbnail .slick-current {
+	opacity: 1;
+}

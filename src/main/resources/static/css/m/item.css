@@ -1,0 +1,78 @@
+@charset "UTF-8";
+.item {
+	display: grid;
+	height: 80px;
+	width: min(360px, calc(100dvw - 60px));
+	grid-template-columns: 50px calc(min(360px, calc(100dvw - 60px)) - 140px) 70px;
+	grid-template-rows: 50px 30px;
+
+	background-color: white;
+	padding: 10px 0 10px 40px;
+	border-radius: 32px;
+
+	text-align: left;
+
+	> img {
+		grid-row: 1 / 3;
+		grid-column: 1;
+
+		float: left;
+		width: auto;
+		height: 80px;
+	}
+
+	& .name {
+		grid-row: 1;
+		grid-column: 2 / 4;
+
+		font-size: 28px;
+	}
+
+	& .desc {
+		grid-row: 2;
+		grid-column: 2;
+	}
+
+	& .money {
+		grid-row: 2;
+		grid-column: 3;
+
+
+		display: flex;
+		justify-content: left;
+		align-items: end;
+		font-size: 24px;
+	}
+}
+
+.close {
+	> * {
+		opacity: 0.3;
+	}
+
+	> .soldout {
+		opacity: 1 !important;
+		display: inline-block;
+
+		width: fit-content;
+
+		position: relative;
+		bottom: 70px;
+		left: 70px;
+
+		font-size: 40px;
+		color: red;
+		text-shadow: 0px 0px 10px yellowgreen;
+
+		transform: rotate(-20deg);
+		-moz-transform: rotate(-20deg);
+		-webkit-transform: rotate(-20deg);
+	}
+}
+.soldout {
+	display: none;
+}
+
+.money::after {
+	content: "円";
+}

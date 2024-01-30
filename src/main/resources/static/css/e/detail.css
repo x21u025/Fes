@@ -1,0 +1,94 @@
+@charset "UTF-8";
+body {
+	margin: 0;
+}
+table {
+	border-collapse: collapse;
+	margin: auto;
+}
+th, td {
+	padding: 4px;
+	border: 1px solid black;
+	text-align: center;
+}
+tr th {
+	&:nth-of-type(1) {
+		width: 50px;
+	}
+	&:nth-of-type(2) {
+		width: 110px;
+	}
+	&:nth-of-type(3) {
+		width: 70px;
+	}
+	&:nth-of-type(4) {
+		width: 32px;
+	}
+}
+img {
+	width: auto;
+	height: 5em;
+	vertical-align: middle;
+}
+.money::after {
+	content: " 円";
+}
+.unit_time::after {
+	content: "時台";
+}
+li:last-of-type .unit_time::after {
+	content: "";
+}
+
+body > div {
+	margin: auto;
+	width: fit-content;
+}
+
+h1 {
+	text-align: center;
+}
+ol {
+	padding: 0;
+}
+
+li {
+	margin: 10px
+}
+
+details {
+	border: 1px solid black;
+	width: fit-content;
+	padding: 10px;
+
+	background-color: white;
+}
+
+details[open] summary {
+	border-bottom: 1px solid black;
+	padding-bottom: 4px;
+	margin-bottom: 10px;
+}
+
+summary {
+	list-style: none;
+	display: grid;
+	grid-template-columns: 220px 80px;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	cursor: pointer;
+}
+summary::-webkit-details-marker {
+	display: none;
+}
+summary > span:first-child {
+	text-align: left;
+}
+summary span:last-child {
+	text-align: right;
+	border-left: 1px solid gray;
+}

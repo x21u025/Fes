@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="~{m/fragment :: head(title = 'レジ', scripts = ~{::script}, links = ~{::link})}">
+	<link th:href="@{/css/r/index.css}" rel="stylesheet">
+	<script type="text/javascript" th:src="@{/js/r/index.js}"></script>
+	<link rel="manifest" th:href="@{/json/r/manifest.json}">
+	<link rel="manifest" href="manifest.webmanifest" />
+	<script async src="https://cdn.jsdelivr.net/npm/pwacompat" crossorigin="anonymous"></script>
+	<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+	<script>
+		window.OneSignalDeferred = window.OneSignalDeferred || [];
+		OneSignalDeferred.push(function(OneSignal) {
+			OneSignal.init({
+				appId: "",
+			});
+		});
+	</script>
+</head>
+<body>
+<div class="container">
+	<div class="menu">
+		<ul class="menulist">
+			<li th:each="menu : ${menuList}" th:id="${menu.id}">
+				<div class="item" th:classappend="${menu.close ? 'close' : ''}">
+					<img th:src="${menu.pic}" style="float: left">
+					<span th:text="${menu.name}" class="name"></span>
+					<span th:text="${menu.desc}" class="desc"></span>
+					<span th:text="${menu.prize}" class="money"></span>
+					<button class="crement" value="+" th:onclick="|incrementMenu(__${menu.id}__)|" th:disabled="${menu.close}">+</button>
+					<button class="crement" value="-" th:onclick="|decrementMenu(__${menu.id}__)|" th:disabled="${menu.close}">-</button>
+					<span class="soldout">SOLDOUT</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="cart">
+		<ul>
+			<li>
+				<div></div>
+			</li>
+		</ul>
+	</div>
+	<div class="total">
+		<h1 class="money">0点 0</h1>
+	</div>
+	<div class="button">
+		<button onclick="checkCart()">会計</button>
+	</div>
+</div>
+<div class="reload">
+	<button onclick="location.reload()">↻</button>
+</div>
+<div class="check">
+	<div>
+		<table>
+			<tr class="nodel">
+				<th>商品</th>
+				<th>値段</th>
+				<th>個数</th>
+			</tr>
+		</table>
+		<div class="br"></div>
+		<div class="confirm">
+			<button onclick="hideCheck()">戻る</button>
+			<button onclick="sendCart()">確定</button>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+@import "../c/table.css";
+
+select {
+	width: calc(calc(min(calc(100dvh - 50px), 100dvw) - 20px) / 10);
+}
+form > input[type="submit"] {
+	position: fixed;
+	width: 200px;
+	height: 40px;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+.bglist {
+	margin-top: 40px;
+	margin-left: 10px;
+}

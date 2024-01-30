@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{m/fragment :: head(title = 'ボードゲーム', scripts = ~{::script}, links = ~{::link})}">
+	<link th:href="@{/css/c/boardgamedetail.css}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/c/boardgamedetail.js}"></script>
+</head>
+<body>
+	<div th:replace="~{m/fragment :: c_header}"></div>
+
+	<div class="main">
+		<ul class="bglist">
+			<li th:each="bg : ${bgList}">
+				<div class="item">
+					<img th:src="${bg.pic}" style="float: left">
+					<span th:text="${bg.getName()}" class="name"></span>
+					<span th:text="${bg.getDesc()}" class="desc"></span>
+					<span class="recommended">推奨人数</span>
+					<span th:text="${bg.getPlayer()}" class="player"></span>
+				</div>
+			</li>
+		</ul>
+
+		<div class="container">
+			<div class="slider">
+				<div class="slick-img" th:each="i : ${#numbers.sequence(1,count)}">
+					<img
+						th:src="|/img/${path}/${i}.png|"
+						alt=""
+					/>
+				</div>
+			</div>
+			<div class="thumbnail">
+				<div class="thumbnail-img" th:each="i : ${#numbers.sequence(1,count)}">
+					<img
+						th:src="|/img/${path}/${i}.png|"
+						alt=""
+					/>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{m/fragment :: head(title = 'テーブル', scripts = ~{}, links = ~{::link})}">
+	<link th:href="@{/css/c/table.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div th:replace="~{m/fragment :: c_header}"></div>
+
+	<div class="main">
+		<table>
+			<tr th:each="tableRow : ${tableList}">
+				<td th:each="cell : ${tableRow}" th:style="|background-color: ${cell.color}; ${cell.borderColor != null ? 'outline-color: ' + cell.borderColor + ';' : ''}|" th:class="${cell.borderColor != null ? 'outline' : ''}" th:colspan="${cell.dx + 1}" th:rowspan="${cell.dy + 1}">
+					<span th:text="${cell.boardGame != null ? cell.boardGame.name : cell.tableType != null ? cell.tableType.name : ''}" th:style="|color: ${cell.color};|"></span>
+				</td>
+			</tr>
+		</table>
+		<div class="bglist">
+			<ul>
+				<li th:each="bg : ${bgList}">
+					<div class="colorBox" th:style="|background-color: ${bg.color}|"></div>
+					<span th:text="${bg.name}" style="float: left"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

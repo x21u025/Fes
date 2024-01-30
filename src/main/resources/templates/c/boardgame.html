@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{m/fragment :: head(title = 'ボードゲーム', scripts = ~{}, links = ~{::link})}">
+	<link th:href="@{/css/c/boardgame.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div th:replace="~{m/fragment :: c_header}"></div>
+
+	<div class="main">
+		<h1>ボードゲーム一覧</h1>
+		<a th:href="@{/yn}" class="toyn">あなたにおすすめのボードゲームはこちら</a>
+		<ul class="bglist">
+			<li th:each="bg : ${bgList}" th:onclick="|location.href='/boardgame/__${bg.getEnName()}__'|">
+				<div class="item">
+					<img th:src="${bg.pic}" style="float: left">
+					<span th:text="${bg.getName()}" class="name"></span>
+					<span th:text="${bg.getDesc()}" class="desc"></span>
+					<span class="recommended">推奨人数</span>
+					<span th:text="${bg.getPlayer()}" class="player"></span>
+				</div>
+			</li>
+		</ul>
+		<a th:href="@{/yn}" class="toyn">あなたにおすすめのボードゲームはこちら</a>
+	</div>
+</body>
+</html>

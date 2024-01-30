@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{m/fragment :: head(title = 'メニュー', scripts = ~{::script}, links = ~{::link})}">
+	<link th:href="@{/css/c/menu.css}" rel="stylesheet" type="text/css">
+	<script th:src="@{/js/c/menu.js}" type="text/javascript"></script>
+</head>
+<body>
+	<div th:replace="~{m/fragment :: c_header}"></div>
+
+	<div class="main">
+		<h1>メニュー</h1>
+		<ul class="menulist">
+			<li th:each="menu : ${menuList}">
+				<div class="item" th:classappend="${menu.close ? 'close' : ''}">
+					<img th:src="${menu.pic}" style="float: left">
+					<span th:text="${menu.name}" class="name"></span>
+					<span th:text="${menu.desc}" class="desc"></span>
+					<span th:text="${menu.prize}" class="money"></span>
+					<span class="soldout">SOLDOUT</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

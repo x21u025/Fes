@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:fragment="head(title, scripts, links)">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,  maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" href="">
+	<link rel="apple-touch-icon" sizes="180x180" href="">
+	<title th:text="${title} + ' | Fes2023'">Fragment</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/m/header.css}"/>
+	<script type="text/javascript" th:src="@{/js/m/header.js}"></script>
+	<th:block th:replace="${links}" />
+	<th:block th:replace="${scripts}" />
+</head>
+<body>
+
+	<header th:fragment="c_header">
+		<div class="header">
+			<a href="/">激安の殿堂 ボ・ドゲーム</a>
+			<div class="nav openbtn1"><span></span><span></span><span></span></div>
+			<nav>
+				<ul>
+					<li class="sitemenu">サイトメニュー</li>
+					<li><a href="/boardgame">ボードゲーム</a></li>
+					<li><a href="/table">テーブル</a></li>
+					<li><a href="/menu">飲み物</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<header th:fragment="e_header">
+		<style>
+			body {
+				background-color: rgb(178, 205, 255);
+			}
+			header {
+				border-bottom-color: blue;
+			}
+
+			@media (max-width: 767px) {
+				.header {
+					> nav {
+						background-color: rgb(127, 172, 255);
+
+						& .sitemenu {
+							border-bottom-color: blue;
+						}
+					}
+				}
+			}
+		</style>
+		<div class="header">
+			<a href="/e/">激安の殿堂 ボ・ドゲーム</a>
+			<div class="nav openbtn1"><span></span><span></span><span></span></div>
+			<nav>
+				<ul>
+					<li class="sitemenu">サイトメニュー</li>
+					<li><a href="/e/boardgame">ボードゲーム</a></li>
+					<li><a href="/e/table">テーブル</a></li>
+					<li><a href="/e/tableboardgame">テーブルボードゲーム</a></li>
+					<li><a href="/e/tabletype">テーブル種類</a></li>
+					<li><a href="/e/menu">飲み物</a></li>
+					<li><a href="/e/detail">明細</a></li>
+					<li><a href="/e/yn">Yes/No</a></li>
+					<li><a href="/e/short">短縮</a></li>
+					<li><a href="/r/">レジ</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+</body>
+</html>

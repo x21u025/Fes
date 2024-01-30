@@ -1,0 +1,22 @@
+@charset "UTF-8";
+@import "../m/bg_item.css";
+
+ul.bglist {
+	list-style: none;
+	padding: 0;
+	width: fit-content;
+	margin: 16px auto;
+
+	> li {
+		height: auto;
+		width: fit-content;
+		margin: 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+.main {
+	padding-bottom: 20px;
+}

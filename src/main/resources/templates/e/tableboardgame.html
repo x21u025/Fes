@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{m/fragment :: head(title = '従業員テーブルボードゲーム', scripts = ~{}, links = ~{::link})}">
+	<link th:href="@{/css/e/table.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div th:replace="~{m/fragment :: e_header}"></div>
+
+	<div class="main">
+		<form th:action="@{/e/tableboardgame}" th:object="${tableListParam}" th:method="post">
+			<table>
+				<tr th:each="tableRow, st : *{tableboardGameList}">
+					<td th:each="cell, st2 : ${tableRow}" th:style="|background-color: ${cell.color}|" th:colspan="${cell.dx + 1}" th:rowspan="${cell.dy + 1}">
+						<input type="hidden" th:name="tableboardGameList[__${st.index}__][__${st2.index}__].row" th:value="${cell.row}">
+						<input type="hidden" th:name="tableboardGameList[__${st.index}__][__${st2.index}__].column" th:value="${cell.column}">
+						<input th:if="${cell.tableType == null}" type="hidden" th:name="tableboardGameList[__${st.index}__][__${st2.index}__].id" th:value="0">
+						<span th:textt="${cell.tableType == null ? '' : cell.tableType.name}" th:style="|color: ${cell.color};|"></span>
+						<th:block th:if="${cell.tableType != null}">
+							<select th:field="*{tableboardGameList[__${st.index}__][__${st2.index}__].id}"/>
+								<option value="0"></option>
+								<option th:each="bg, st3 : ${bgList}" th:value="${bg.id}" th:text="${bg.name}" th:selected="${bg.id == cell.id}"></option>
+							</select>
+						</th:block>
+					</td>
+				</tr>
+			</table>
+			<input type="submit" value="変更">
+		</form>
+		<div class="bglist">
+			<ul>
+				<li th:each="ty : ${tyList}">
+					<div class="colorBox" th:style="|background-color: ${ty.color}|"></div>
+					<span th:text="${ty.name}" style="float: left"></span>
+				</li>
+			</ul>
+		</div>
+		<div class="bglist">
+			<ul>
+				<li th:each="bg : ${bgList}">
+					<div class="colorBox" th:style="|background-color: ${bg.color}|"></div>
+					<span th:text="${bg.name}" style="float: left"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

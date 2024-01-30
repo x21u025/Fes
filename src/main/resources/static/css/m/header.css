@@ -1,0 +1,208 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+@import url('https://fonts.googleapis.com/earlyaccess/notosansjapanese.css');
+
+body {
+	margin: 0;
+
+	background-color: rgb(255, 228, 178);
+
+	font-family: 'Noto Sans Japanese', sans-serif;
+	font-weight: 500;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+header {
+	border-bottom: 1px solid orangered;
+}
+.header {
+	width: 100%;
+	height: 50px;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	> a {
+		text-decoration: none;
+		color: black;
+		font-size: 24px;
+		margin-left: 10px;
+		font-family: 'Mochiy Pop One', sans-serif;
+	}
+
+	.sitemenu {
+		display: none;
+	}
+
+	.nav {
+		display: none;
+	}
+
+	> nav {
+		display: inline-block;
+		height: 100%;
+
+		& ul {
+			display: flex;
+			list-style: none;
+			margin: 0;
+			height: 100%;
+			padding: 0;
+		}
+
+		& li {
+			margin: auto 10px;
+		}
+
+		& a {
+			display: inline-flex;
+			height: 100%;
+			align-items: center;
+			justify-content: space-around;
+			text-align: center;
+			text-decoration: none;
+			color: black;
+
+			&:hover {
+				text-decoration: underline;
+				text-underline-offset: 4px;
+			}
+		}
+	}
+}
+.main {
+	text-align: center;
+}
+
+.toyn {
+	text-underline-offset: 4px;
+	padding-bottom: 10px
+}
+
+.openbtn1{
+	position: relative;/*ボタン内側の基点となるためrelativeを指定*/
+	cursor: pointer;
+	width: 50px;
+	height:50px;
+	border-radius: 5px;
+}
+
+/*ボタン内側*/
+.openbtn1 span{
+	display: inline-block;
+	transition: all .4s;/*アニメーションの設定*/
+	position: absolute;
+	left: 14px;
+	height: 3px;
+	border-radius: 2px;
+	background: #000000;
+	width: 45%;
+}
+
+.openbtn1 span:nth-of-type(1) {
+	top:15px;
+}
+
+.openbtn1 span:nth-of-type(2) {
+	top:23px;
+}
+
+.openbtn1 span:nth-of-type(3) {
+	top:31px;
+}
+
+/*activeクラスが付与されると線が回転して×に*/
+
+.openbtn1.active span:nth-of-type(1) {
+	top: 18px;
+	left: 18px;
+	transform: translateY(6px) rotate(-45deg);
+	width: 30%;
+}
+
+.openbtn1.active span:nth-of-type(2) {
+	opacity: 0;/*真ん中の線は透過*/
+}
+
+.openbtn1.active span:nth-of-type(3){
+	top: 30px;
+	left: 18px;
+	transform: translateY(-6px) rotate(45deg);
+	width: 30%;
+}
+
+
+@media (max-width: 767px) {
+	.header {
+		> .nav {
+			display: block;
+			z-index: 10;
+		}
+
+		> nav {
+			opacity: 0; /* 初期は非表示 */
+			visibility: hidden;
+			transform: translateY(-10px); /* 少し上に移動 */
+			transition: .4s; /* 1秒かけて表示 */
+
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 9;
+
+			width: 100vw;
+			height: fit-content;
+			background-color: rgb(255, 210, 127);
+
+			border-bottom: 1px solid black;
+
+			& ul {
+				display: block;
+				height: fit-content;
+
+				margin-bottom: 10px;
+			}
+
+			& li {
+				border-bottom: 1px solid black;
+
+				&:nth-of-type(2) {
+					margin-top: 10px;
+					border-top: 1px solid black;
+				}
+			}
+
+			& a {
+				&:hover {
+					text-decoration: none;
+				}
+			}
+
+			& a, & .sitemenu {
+				display: block;
+				height: 36px;
+				margin: 2px 0;
+				font-size: 26px;
+			}
+
+			& .sitemenu {
+				height: 47px;
+				padding-left: 10px;
+				font-weight: bold;
+				font-size: 30px;
+				border-bottom: 1px solid orangered;
+			}
+		}
+		> .openbtn1.active + nav {
+			opacity: 1; /* 表示 */
+			visibility: visible;
+			transform: translateY(0); /* 上から降りてくる */
+
+		}
+	}
+
+}

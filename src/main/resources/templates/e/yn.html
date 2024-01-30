@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{m/fragment :: head(title = '従業員Yes/No', scripts = ~{::script}, links = ~{::link})}">
+	<link th:href="@{/css/e/yn.css}" rel="stylesheet" type="text/css">
+	<script th:src="@{/js/e/yn.js}" type="text/javascript"></script>
+</head>
+<body>
+	<div th:replace="~{m/fragment :: e_header}"></div>
+
+	<div class="main">
+		<h1>Yes/No</h1>
+		<form th:action="@{/e/yn}" th:object="${ynChartListParam}" th:method="post">
+			<table>
+				<tr>
+					<th>テキスト</th>
+					<th>重み</th>
+					<th>並び順</th>
+					<th>ボードゲーム</th>
+					<th>削除</th>
+				</tr>
+				<tr th:each="yn, st : *{ynList}">
+					<input type="hidden" th:field="*{ynList[__${st.index}__].id}">
+					<td><input type="text" th:field="*{ynList[__${st.index}__].text}"></td>
+					<td><input type="number" th:field="*{ynList[__${st.index}__].weight}"></td>
+					<td><input type="text" th:field="*{ynList[__${st.index}__].sort}"></td>
+					<td>
+						<select th:field="*{ynList[__${st.index}__].bgId}" multiple="multiple" >
+							<option th:each="bg, st2 : ${bgList}" th:value="${bg.id}" th:text="${bg.name}" th:selected="${#lists.contains(ynChartListParam.ynList[0].bgId, bg.id)}"></option>
+						</select>
+					</td>
+					<td><input type="checkbox" th:field="*{ynList[__${st.index}__].deleteFlag}"></td>
+				</tr>
+				<tr th:with="last=*{ynList.size}">
+					<td><input type="text" th:field="*{ynList[__${last}__].text}"></td>
+					<td><input type="number" th:field="*{ynList[__${last}__].weight}"></td>
+					<td><input type="text" th:id="|ynList${last}.sort|" th:name="|ynList[${last}].sort|" th:value="${last + 1}"></td>
+					<td>
+						<select th:field="*{ynList[__${last}__].bgId}" multiple="multiple" >
+							<option th:each="bg, st2 : ${bgList}" th:value="${bg.id}" th:text="${bg.name}"></option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<input type="submit" value="更新">
+		</form>
+	</div>
+</body>
+</html>
+
+
+<!--
+<!DOCTYPE html>
+<html xmlns="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>従業員Yes/No | 若幸祭</title>
+<link th:href="@{/css/e/menu.css}" rel="stylesheet">
+</head>
+<body>
+	<form th:action="@{/e/yn}" th:object="${ynChartListParam}" th:method="post">
+		<table>
+			<tr>
+				<th>テキスト</th>
+				<th>重み</th>
+				<th>並び順</th>
+				<th>ボードゲーム</th>
+				<th>削除</th>
+			</tr>
+			<tr th:each="yn, st : *{ynList}">
+				<input type="hidden" th:field="*{ynList[__${st.index}__].id}">
+				<td><input type="text" th:field="*{ynList[__${st.index}__].text}"></td>
+				<td><input type="number" th:field="*{ynList[__${st.index}__].weight}"></td>
+				<td><input type="text" th:field="*{ynList[__${st.index}__].sort}"></td>
+				<td>
+					<select th:field="*{ynList[__${st.index}__].bgId}" multiple="multiple" >
+						<option th:each="bg, st2 : ${bgList}" th:value="${bg.id}" th:text="${bg.name}" th:selected="${#lists.contains(ynChartListParam.ynList[0].bgId, bg.id)}"></option>
+					</select>
+				</td>
+				<td><input type="checkbox" th:field="*{ynList[__${st.index}__].deleteFlag}"></td>
+			</tr>
+			<tr th:with="last=*{ynList.size}">
+				<td><input type="text" th:field="*{ynList[__${last}__].text}"></td>
+				<td><input type="number" th:field="*{ynList[__${last}__].weight}"></td>
+				<td><input type="text" th:id="|ynList${last}.sort|" th:name="|ynList[${last}].sort|" th:value="${last + 1}"></td>
+				<td>
+					<select th:field="*{ynList[__${last}__].bgId}" multiple="multiple" >
+						<option th:each="bg, st2 : ${bgList}" th:value="${bg.id}" th:text="${bg.name}"></option>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<input type="submit" value="更新">
+		<a th:href="@{/e/}">戻る</a>
+	</form>
+</body>
+</html>
+
+ -->

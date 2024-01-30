@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{m/fragment :: head(title = '従業員メニュー', scripts = ~{::script}, links = ~{::link})}">
+	<link th:href="@{/css/e/menu.css}" rel="stylesheet" type="text/css">
+	<script th:src="@{/js/e/menu.js}" type="text/javascript"></script>
+</head>
+<body>
+	<div th:replace="~{m/fragment :: e_header}"></div>
+
+	<div class="main">
+		<h1>メニュー一覧</h1>
+		<form th:action="@{/e/menu}" th:object="${menuListParam}" th:method="post">
+			<table>
+				<tr>
+					<th>画像</th>
+					<th>画像URL</th>
+					<th>名前</th>
+					<th>説明</th>
+					<th>価格</th>
+					<th>売切</th>
+					<th>削除</th>
+				</tr>
+				<tr th:each="menu, st : *{menuList}">
+					<td class="pic"><img th:src="${menu.pic}"></td>
+					<input type="hidden" th:field="*{menuList[__${st.index}__].id}">
+					<td><input type="url" th:field="*{menuList[__${st.index}__].pic}"></td>
+					<td><input type="text" th:field="*{menuList[__${st.index}__].name}"></td>
+					<td><input type="text" th:field="*{menuList[__${st.index}__].desc}"></td>
+					<td><input type="text" th:field="*{menuList[__${st.index}__].prize}"></td>
+					<td><input type="checkbox" th:field="*{menuList[__${st.index}__].close}"></td>
+					<td><input type="checkbox" th:field="*{menuList[__${st.index}__].deleteFlag}"></td>
+				</tr>
+				<tr th:with="last=*{menuList.size}">
+					<td class="pic"><img src=""></td>
+					<td><input type="url" th:field="*{menuList[__${last}__].pic}"></td>
+					<td><input type="text" th:field="*{menuList[__${last}__].name}"></td>
+					<td><input type="text" th:field="*{menuList[__${last}__].desc}"></td>
+					<td><input type="text" th:field="*{menuList[__${last}__].prize}"></td>
+				</tr>
+			</table>
+			<input type="submit" value="更新">
+		</form>
+	</div>
+</body>
+</html>

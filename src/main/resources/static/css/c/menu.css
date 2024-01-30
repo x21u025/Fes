@@ -1,0 +1,19 @@
+@charset "UTF-8";
+@import "../m/item.css";
+
+ul.menulist {
+	list-style: none;
+	padding: 0;
+	width: fit-content;
+	margin: 16px auto;
+
+	> li {
+		height: auto;
+		width: fit-content;
+		margin: 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
